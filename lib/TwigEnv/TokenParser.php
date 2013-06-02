@@ -48,6 +48,10 @@ class TokenParser extends \Twig_TokenParser
 		return $container;
 	}
 
+	/**
+	 * @param Twig_TokenStream $stream
+	 * @param Twig_Node $container
+	 */
 	public function parseEnv(Stream $stream, Node $container)
 	{
 		$not = false;
@@ -70,7 +74,9 @@ class TokenParser extends \Twig_TokenParser
 		}
 
 		$stream->expect(Token::BLOCK_END_TYPE);
-		$body = $this->parser->subparse(array($this, 'decideIfFork'));
+		$body = $this->parser->subparse(function($token){
+			return $token->test(array('env', 'endenv'));
+		});
 
 		if($not && null === $condition){
 			$container->setNode('__default__', $body);
@@ -83,11 +89,9 @@ class TokenParser extends \Twig_TokenParser
 		}
 	}
 
-	public function decideIfFork(Token $token)
-	{
-		return $token->test(array('env', 'endenv'));
-	}
-
+	/**
+	 * @param String
+	 */
 	public function getTag()
 	{
 		return 'env';
