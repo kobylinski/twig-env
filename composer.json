@@ -1,0 +1,22 @@
+{
+	"name":"kobylinski/twigenv",
+	"type":"library",
+	"description":"Twig extension, helps to define environment specific code in templates",
+	"keywords":["twig", "environment"],
+	"homepage":"https://github.com/kobylinski/twig-env",
+	"license":"MIT",
+	"authors":[
+		{
+			"name": "Marek Kobylinski",
+			"email": "marek.kobylinski@johnpitcher.pl"
+		}
+	],
+	"require": {
+        "php": ">=5.2.4"
+    },
+    "autoload": {
+        "psr-0" : {
+            "TwigEnv" : "lib/"
+        }
+    }
+}
